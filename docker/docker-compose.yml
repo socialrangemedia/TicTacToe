@@ -1,0 +1,33 @@
+services:
+  app:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ..:/app
+      - node_modules:/app/node_modules
+      - ./entrypoint.sh:/entrypoint.sh:ro
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: development
+    command: sh /entrypoint.sh
+    restart: unless-stopped
+
+  # Optioneel: uncomment voor Postgres (API's met database)
+  # postgres:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     POSTGRES_DB: app
+  #     POSTGRES_USER: app
+  #     POSTGRES_PASSWORD: secret
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U app -d app"]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 5
+
+volumes:
+  node_modules:
+  # pgdata:

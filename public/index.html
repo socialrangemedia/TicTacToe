@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe - Raaf's Game</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>🦅 Tic Tac Toe 🦅</h1>
+    
+    <div class="game-container" id="gameContainer">
+      <!-- Spelmodus keuze -->
+      <div class="game-mode-selection" id="modeSelection">
+        <h2>Kies een spelmodus</h2>
+        <button id="newGameBtn" class="btn">Nieuw Spel Maken</button>
+        <button id="newSinglePlayerBtn" class="btn">Tegen Computer Spelen</button>
+        
+        <div class="or-separator">of</div>
+        
+        <div class="join-game-form">
+          <input type="text" id="gameIdInput" placeholder="Voer game ID in" class="input-field">
+          <button id="joinGameBtn" class="btn">Join Spel</button>
+        </div>
+      </div>
+      
+      <!-- Wachtkamer voor multiplayer -->
+      <div class="game-lobby hidden" id="gameLobby">
+        <h2>Wachten op tegenstander...</h2>
+        <p>Deel deze Game ID met je vriend: <strong id="currentGameId"></strong></p>
+        <div class="waiting-animation">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+      
+      <!-- Spelbord -->
+      <div class="game-board hidden" id="gameBoard">
+        <div class="game-info">
+          <h3>Jij bent: <span id="yourSymbol"></span></h3>
+          <h3>Huidige beurt: <span id="currentTurn"></span></h3>
+        </div>
+        <div class="board" id="board">
+          <div class="cell" data-index="0"></div>
+          <div class="cell" data-index="1"></div>
+          <div class="cell" data-index="2"></div>
+          <div class="cell" data-index="3"></div>
+          <div class="cell" data-index="4"></div>
+          <div class="cell" data-index="5"></div>
+          <div class="cell" data-index="6"></div>
+          <div class="cell" data-index="7"></div>
+          <div class="cell" data-index="8"></div>
+        </div>
+        <div class="game-status" id="gameStatus"></div>
+        <button id="rematchBtn" class="btn hidden">Nieuwe Ronde</button>
+      </div>
+    </div>
+    
+    <div class="instructions">
+      <h3>📋 Hoe te spelen:</h3>
+      <ol>
+        <li>Kies "Tegen Computer Spelen" of maak een nieuw spel</li>
+        <li>Klik op een vakje om je symbool te plaatsen</li>
+        <li>Win door 3 op een rij te krijgen!</li>
+        <li>Bij "Tegen Computer": Jij bent altijd X, de computer is O</li>
+      </ol>
+    </div>
+  </div>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
